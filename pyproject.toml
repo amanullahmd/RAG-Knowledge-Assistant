@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-knowledge-assistant"
+version = "1.0.0"
+description = "RAG-based company knowledge assistant with source citations"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Amanullah", email = "amanullahmd@example.com"}
+]
+
+[tool.setuptools]
+packages = ["backend", "frontend"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["backend/tests"]
+addopts = "-v --tb=short"
+
+[tool.pylance]
+pythonPath = ["."]
