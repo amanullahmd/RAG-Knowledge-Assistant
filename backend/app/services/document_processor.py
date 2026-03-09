@@ -16,8 +16,8 @@ try:
 except ImportError:
     DocxDocument = None
 
-from ..core.config import settings
-from ..core.exceptions import DocumentProcessingError
+from backend.app.core.config import settings
+from backend.app.core.exceptions import DocumentProcessingError
 
 class DocumentProcessor:
     """Handles multi-format document parsing and chunking"""

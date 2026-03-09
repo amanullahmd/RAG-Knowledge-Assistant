@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     """Application settings from environment variables"""
     
     # OpenAI Configuration
-    openai_api_key: str
+    openai_api_key: str = ""
     
     # Backend Configuration
     backend_host: str = "0.0.0.0"

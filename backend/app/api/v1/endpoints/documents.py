@@ -6,14 +6,12 @@ from typing import List
 from datetime import datetime
 import uuid
 
-from ....models.schemas import DocumentResponse, DocumentCreate
-from ....services import (
-    DocumentProcessor,
-    EmbeddingService,
-    VectorStore,
-    ChatService
-)
-from ....core.exceptions import DocumentProcessingError
+from backend.app.models.schemas import DocumentResponse, DocumentCreate
+from backend.app.services.document_processor import DocumentProcessor
+from backend.app.services.embedding_service import EmbeddingService
+from backend.app.services.vector_store import VectorStore
+from backend.app.services.chat_service import ChatService
+from backend.app.core.exceptions import DocumentProcessingError
 
 router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
 logger = logging.getLogger(__name__)
@@ -35,8 +33,11 @@ async def upload_document(file: UploadFile = File(...)):
         # Read file content
         content = await file.read()
         
+        # Handle None filename
+        filename_str = file.filename or "unknown"
+        
         # Process document
-        text, chunks, metadata = doc_processor.process_file(file.filename, content)
+        text, chunks, metadata = doc_processor.process_file(filename_str, content)
         
         # Generate embeddings
         embeddings = embedding_service.embed_texts(chunks)
@@ -63,7 +64,7 @@ async def upload_document(file: UploadFile = File(...)):
         
         return DocumentResponse(
             doc_id=doc_id,
-            filename=file.filename,
+            filename=filename_str,
             file_type=file.content_type or "unknown",
             size_bytes=len(content),
             uploaded_at=datetime.now(),

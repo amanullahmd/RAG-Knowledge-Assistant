@@ -4,8 +4,8 @@ import logging
 from typing import List, Dict
 from rank_bm25 import BM25Okapi
 
-from ..core.exceptions import RetrievalError
-from .vector_store import VectorStore
+from backend.app.core.exceptions import RetrievalError
+from backend.app.services.vector_store import VectorStore
 
 logger = logging.getLogger(__name__)
 
