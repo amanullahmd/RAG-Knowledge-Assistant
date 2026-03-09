@@ -9,52 +9,34 @@ from backend.app.core.exceptions import EmbeddingError
 
 logger = logging.getLogger(__name__)
 
+
 class EmbeddingService:
     """Generate embeddings using OpenAI API"""
-    
-    def __init__(self, api_key: str = None, model: str = "text-embedding-3-small"):
+
+    def __init__(self, api_key: str = None, model: str = None):
         self.client = OpenAI(api_key=api_key or settings.openai_api_key)
-        self.model = model
-    
+        self.model = model or settings.embedding_model
+
     def embed_text(self, text: str) -> List[float]:
-        """
-        Generate embedding for a single text
-        
-        Args:
-            text: Text to embed
-            
-        Returns:
-            Embedding vector
-        """
+        """Generate embedding for a single text"""
         return self.embed_texts([text])[0]
-    
+
     def embed_texts(self, texts: List[str]) -> List[List[float]]:
-        """
-        Generate embeddings for multiple texts
-        
-        Args:
-            texts: List of texts to embed
-            
-        Returns:
-            List of embedding vectors
-        """
+        """Generate embeddings for multiple texts"""
         if not texts:
             return []
-        
+
         try:
-            # Clean texts
-            texts = [text.replace("\n", " ")[:8191] for text in texts]
-            
-            # Call OpenAI API
+            cleaned = [text.replace("\n", " ").strip()[:8191] for text in texts]
+            cleaned = [t if t else " " for t in cleaned]
+
             response = self.client.embeddings.create(
-                input=texts,
-                model=self.model
+                input=cleaned,
+                model=self.model,
             )
-            
-            # Extract embeddings
-            embeddings = [item.embedding for item in response.data]
-            return embeddings
-            
+
+            return [item.embedding for item in response.data]
+
         except Exception as e:
-            logger.error(f"Embedding generation failed: {str(e)}")
-            raise EmbeddingError(f"Failed to generate embeddings: {str(e)}")
+            logger.error(f"Embedding generation failed: {e}")
+            raise EmbeddingError(f"Failed to generate embeddings: {e}")
