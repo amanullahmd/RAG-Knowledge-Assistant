@@ -6,14 +6,14 @@ from typing import List
 from datetime import datetime
 import uuid
 
-from backend.app.models import DocumentResponse, DocumentCreate
-from backend.app.services import (
+from ....models.schemas import DocumentResponse, DocumentCreate
+from ....services import (
     DocumentProcessor,
     EmbeddingService,
     VectorStore,
     ChatService
 )
-from backend.app.core import DocumentProcessingError
+from ....core.exceptions import DocumentProcessingError
 
 router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
 logger = logging.getLogger(__name__)

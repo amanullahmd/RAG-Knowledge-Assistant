@@ -4,7 +4,8 @@ import logging
 from typing import List
 from openai import OpenAI
 
-from backend.app.core import EmbeddingError, settings
+from ..core.config import settings
+from ..core.exceptions import EmbeddingError
 
 logger = logging.getLogger(__name__)
 

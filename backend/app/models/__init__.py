@@ -1,5 +1,5 @@
 """Models module"""
-from backend.app.models.schemas import (
+from .schemas import (
     DocumentCreate,
     DocumentResponse,
     ChatQueryRequest,

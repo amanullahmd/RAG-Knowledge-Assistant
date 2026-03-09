@@ -6,20 +6,20 @@ from fastapi.responses import StreamingResponse
 from typing import List
 from datetime import datetime
 
-from backend.app.models import (
+from ....models.schemas import (
     ChatQueryRequest,
     ChatQueryResponse,
     ChatHistoryResponse,
     ChatMessage,
     Citation
 )
-from backend.app.services import (
+from ....services import (
     EmbeddingService,
     ChatService,
     HybridRetriever
 )
-from backend.app.services.vector_store import VectorStore
-from backend.app.services.llm_service import LLMService
+from ....services.vector_store import VectorStore
+from ....services.llm_service import LLMService
 
 router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
 logger = logging.getLogger(__name__)

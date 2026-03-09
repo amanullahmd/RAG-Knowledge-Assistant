@@ -5,9 +5,9 @@ import uuid
 from typing import List, Dict, Optional, Tuple
 from datetime import datetime
 
-from backend.app.services.llm_service import LLMService
-from backend.app.services.retriever import HybridRetriever
-from backend.app.services.embedding_service import EmbeddingService
+from .llm_service import LLMService
+from .retriever import HybridRetriever
+from .embedding_service import EmbeddingService
 
 logger = logging.getLogger(__name__)
 

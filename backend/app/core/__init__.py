@@ -1,6 +1,6 @@
 """Backend core module"""
-from backend.app.core.config import settings
-from backend.app.core.exceptions import (
+from .config import settings
+from .exceptions import (
     DocumentNotFoundError,
     EmbeddingError,
     DocumentProcessingError,

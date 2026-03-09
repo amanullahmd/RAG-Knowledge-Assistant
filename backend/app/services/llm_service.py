@@ -5,7 +5,7 @@ import json
 from typing import List, Dict, Tuple
 from openai import OpenAI
 
-from backend.app.core import settings
+from ..core.config import settings
 
 logger = logging.getLogger(__name__)
 
