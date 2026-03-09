@@ -11,7 +11,10 @@ from datetime import datetime
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
+# For Railway: set API_BASE_URL env var to your backend service URL
+# e.g. https://rag-backend.up.railway.app
+# For local dev: defaults to http://localhost:8000
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
 BACKEND_TIMEOUT = int(os.getenv("BACKEND_TIMEOUT", "60"))
 
 # ---------------------------------------------------------------------------

@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     # Backend Configuration
     backend_host: str = "0.0.0.0"
     backend_port: int = 8000
+    port: int = 0  # Railway sets PORT; 0 means "use backend_port"
 
     # Frontend Configuration
     frontend_host: str = "0.0.0.0"
